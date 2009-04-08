@@ -77,3 +77,8 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'url',
 )
+
+try:
+    from settings_local import *
+except:
+    pass
