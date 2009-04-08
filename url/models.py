@@ -1,3 +1,7 @@
 from django.db import models
 
-# Create your models here.
+class UrlMapping(models.Model):
+    """maps from a SHA hash to a URL"""
+    
+    url = models.URLField()
+    sha_hash = models.CharField(max_length=40)
