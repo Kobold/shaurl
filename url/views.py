@@ -17,9 +17,9 @@ def create(request):
         form = UrlForm(request.POST)
         if form.is_valid():
             url = form.cleaned_data['url']
-            UrlMapping(url=url, sha_hash=sha(url).hexdigest()).save()
-            
-            return HttpResponseRedirect('/')
+            um = UrlMapping(url=url, sha_hash=sha(url).hexdigest())
+            um.save()
+            return render_to_response('created.html', {'url_mapping': um})
     else:
         form = UrlForm()
 

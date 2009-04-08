@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="blue_box top_box">
+  <h1>URL Shortened</h1>
+  
+  <p>{{ url_mapping.url }} is now... <tt>{{ url_mapping.get_absolute_url }}</tt></p>
+  <p>Return to <a href="/">main page</a>.</p>
+</div>
+{% endblock %}

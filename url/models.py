@@ -8,7 +8,7 @@ class UrlMapping(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     
     def get_absolute_url(self):
-        return '/%s' % self.sha_hash
+        return 'http://sha1.us/%s' % self.sha_hash
 
     class Meta:
         ordering = ['-created']

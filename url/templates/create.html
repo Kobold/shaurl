@@ -1,63 +1,6 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
-   "http://www.w3.org/TR/html4/strict.dtd">
+{% extends "base.html" %}
 
-<html lang="en">
-<head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <title>SHA-1 Us!</title>
-  <style type="text/css" media="screen">
-h1 {
-font-family: "Gill Sans", "Helvetica Neue", Arial, Helvetica, sans-serif;
-font-size: 100%;
-margin: 5px;
-}
-
-p {
-font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
-font-size: 90%;
-margin: 5px;
-line-height: 125%;
-text-indent: 15px;
-}
-
-.blue_box {
-background-color: #DBE3FE;
-border: 2px solid #2E59F7;
-margin: 20px auto;
-overflow: auto;
-padding: 10px;
-width: 800px;
-}
-
-.top_box {
-margin-top: 80px;
-}
-
-input[type=text] {
-font-size: 14px;
-padding: 2px;
-width: 98%;
-}
-
-input[type=submit] {
-border: 1px solid #999;
-font-family: "Gill Sans", "Helvetica Neue", Arial, Helvetica, sans-serif;
-font-size: 14px;
-float: right;
-}
-  </style>
-  <script type="text/javascript">
-  var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-  document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-  </script>
-  <script type="text/javascript">
-  try {
-  var pageTracker = _gat._getTracker("UA-8292700-1");
-  pageTracker._trackPageview();
-  } catch(err) {}</script>
-</head>
-<body>
-
+{% block content %}
 <div class="blue_box top_box">
   <form action="" method="POST">
   {{ form.url.errors }}
@@ -70,7 +13,7 @@ float: right;
   <h1>Recently Shortened URLs</h1>
   <ul>
   {% for url in recent_urls %}
-    <li>{{ url.url }} - <a href="{{ url.get_absolute_url }}">{{ url.get_absolute_url }}</a></li>
+    <li><tt>{{ url.get_absolute_url }}</tt> - {{ url.url }}</li>
   {% endfor %}
   </ul>
 </div>
@@ -87,14 +30,12 @@ url. Users don't have to worry about
   </p>
 
   <p>The second good idea I steal from git is that you can use whatever portion of the URL is
-  convenient for you. If the full &quot;shortened&quot; URL you receive is http://sha1.us/9c17e047f58f9220a7008d4f18152fee4d111d14
-  (way too long), then feel free to use http://sha1.us/9c17e047f58f9220 or even just http://sha1.us/9c17e.
+  convenient for you. If the full &quot;shortened&quot; URL you receive is <tt>http://sha1.us/9c17e047f58f9220a7008d4f18152fee4d111d14</tt>
+  (way too long), then feel free to use <tt>http://sha1.us/9c17e047f58f9220</tt> or even just <tt>http://sha1.us/9c17e</tt>.
   Be aware that the probability of collisions increases if you use a shorter portion of the hash.
   </p>
   
   <p>This site was created by <a href="http://boozeandmescaline.com">Andy Kish</a> and its source
   is available on <a href="http://github.com/Kobold/shaurl/">github</a>.</p>
 </div>
-
-</body>
-</html>
+{% endblock %}
