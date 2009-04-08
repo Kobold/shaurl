@@ -23,4 +23,8 @@ def create(request):
     else:
         form = UrlForm()
 
-    return render_to_response('create.html', {'form': form})
+    recent_urls = UrlMapping.objects.all()[:5]
+    return render_to_response('create.html', {
+        'form': form,
+        'recent_urls': recent_urls,
+    })
