@@ -1,5 +1,5 @@
 from django import forms
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseNotFound, HttpResponseRedirect
 from django.shortcuts import render_to_response
 from sha import sha
 
@@ -32,5 +32,15 @@ def create(request):
 
 def access(request, sha_hash):
     """accesses the URL with hash that starts with sha_hash"""
-    url = UrlMapping.objects.get(sha_hash__startswith=sha_hash)
-    return HttpResponseRedirect(url.url)
+    ums = UrlMapping.objects.filter(sha_hash__startswith=sha_hash)
+    length = len(ums)
+    
+    if length == 0:
+        return HttpResponseNotFound()
+    elif length == 1:
+        return HttpResponseRedirect(ums[0].url)
+    else:
+        return render_to_response('ambiguous.html', {
+            'request_hash': sha_hash,
+            'url_mappings': ums[:5],
+        })

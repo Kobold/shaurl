@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="blue_box top_box">
+  <h1>Ambiguous URL</h1>
+  
+  <p>The SHA hash <tt>{{ request_hash }}</tt> could refer to multiple shortened URLs. Please use
+    more characters in the hash. A few of the most recent entries that match your URL:</p>
+  
+  <ul>
+  {% for um in url_mappings %}
+    <li><tt>{{ um.get_absolute_url }}</tt> - {{ um.url }}</li>
+  {% endfor %}
+  </ul>
+  
+  <p>Return to <a href="/">main page</a>.</p>
+</div>
+{% endblock %}
