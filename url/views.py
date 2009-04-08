@@ -28,3 +28,8 @@ def create(request):
         'form': form,
         'recent_urls': recent_urls,
     })
+
+def access(request, sha_hash):
+    """accesses the URL with hash that starts with sha_hash"""
+    url = UrlMapping.objects.get(sha_hash__startswith=sha_hash)
+    return HttpResponseRedirect(url.url)

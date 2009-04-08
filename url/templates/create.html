@@ -15,7 +15,7 @@
 
 <ul>
 {% for url in recent_urls %}
-  <li><a href="/{{ url.sha_hash }}/">{{ url.url }}</a> - {{ url.sha_hash }}</li>
+  <li><a href="{{ url.get_absolute_url }}">{{ url.url }}</a> - {{ url.sha_hash }}</li>
 {% endfor %}
 </ul>
 
