@@ -1,5 +1,5 @@
 from django import forms
-from django.http import HttpResponseNotFound, HttpResponseRedirect
+from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import render_to_response
 from sha import sha
 
@@ -36,7 +36,7 @@ def access(request, sha_hash):
     length = len(ums)
     
     if length == 0:
-        return HttpResponseNotFound()
+        raise Http404
     elif length == 1:
         return HttpResponseRedirect(ums[0].url)
     else:
