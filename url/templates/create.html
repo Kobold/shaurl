@@ -4,20 +4,85 @@
 <html lang="en">
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <title>SHA URL</title>
+  <title>SHA-1 Us!</title>
+  <style type="text/css" media="screen">
+h1 {
+font-family: "Gill Sans", "Helvetica Neue", Arial, Helvetica, sans-serif;
+font-size: 100%;
+margin: 5px;
+}
+
+p {
+font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
+font-size: 90%;
+margin: 5px;
+line-height: 125%;
+text-indent: 15px;
+}
+
+.blue_box {
+background-color: #DBE3FE;
+border: 2px solid #2E59F7;
+margin: 20px auto;
+overflow: auto;
+padding: 10px;
+width: 800px;
+}
+
+.top_box {
+margin-top: 80px;
+}
+
+input[type=text] {
+font-size: 14px;
+padding: 2px;
+width: 98%;
+}
+
+input[type=submit] {
+border: 1px solid #999;
+font-family: "Gill Sans", "Helvetica Neue", Arial, Helvetica, sans-serif;
+font-size: 14px;
+float: right;
+}
+  </style>
 </head>
 <body>
 
-<form action="" method="POST">
-{{ form.as_p }}
-<input type="submit" value="Shorten">
-</form>
+<div class="blue_box top_box">
+  <form action="" method="POST">
+  {{ form.url.errors }}
+    {{ form.url }}
+    <p><input type="submit" value="Shorten URL"></p>
+  </form>
+</div>
 
-<ul>
-{% for url in recent_urls %}
-  <li><a href="{{ url.get_absolute_url }}">{{ url.url }}</a> - {{ url.sha_hash }}</li>
-{% endfor %}
-</ul>
+<div class="blue_box">
+  <h1>Recently Shortened URLs</h1>
+  <ul>
+  {% for url in recent_urls %}
+    <li>{{ url.url }} - <a href="{{ url.get_absolute_url }}">{{ url.get_absolute_url }}</a></li>
+  {% endfor %}
+  </ul>
+</div>
+
+<div class="blue_box">
+  <h1>Why use SHA-1 Us?</h1>
+
+  <p>Mostly because it steals good ideas from <a href="http://git-scm.com/">git</a>. When you enter
+a URL it is SHA-1 hashed to create the &quot;shortened&quot; URL. If you use the SHA-1 Us service, you can
+cryptographically verify (with a reasonable degree of assurance) that you were redirected to the
+correct URL by just hashing the URL and comparing it with the hash on the end of the shortened
+url. Users don't have to worry about 
+<a href="http://unweary.com/2009/04/the-security-implications-of-url-shortening-services.html">malicious URL manipulation</a>.
+  </p>
+
+  <p>The second good idea we steal from git is that you can use whatever portion of the URL is
+  convenient for you. If the full &quot;shortened&quot; URL you receive is http://sha1.us/9c17e047f58f9220a7008d4f18152fee4d111d14
+  (way too long), then feel free to use http://sha1.us/9c17e047f58f9220 or even just http://sha1.us/9c17e.
+  Be aware that the probability of collisions increases if you use a shorter portion of the hash.
+  </p>
+</div>
 
 </body>
 </html>
